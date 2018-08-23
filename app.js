@@ -19,12 +19,11 @@ var user = require('./router/user/user');
 
 
 //SET UP NODE CONFIG
-app.use(flash());
+
 app.use(express.static(publicDir));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
-app.use(user);
-app.use(main);
+app.use(flash());
 
 //SET UP SESSION
 app.use(session({
@@ -33,6 +32,16 @@ app.use(session({
 	saveUninitialized: false,
 	cookie: { maxAge: 180*60*1000 }
 }));
+
+
+//SET UP GLOBAL
+app.use(function(req, res, next){
+	res.locals.session = req.session;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next()
+});
+
 
 //SET UP PASSPORT
 app.use(passport.initialize());
@@ -43,14 +52,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 //SET UP MLab
 mongoose.connect('mongodb://joelNguyen1010:Hoilamcho1010@ds121332.mlab.com:21332/devbooking');
-//SET UP GLOBAL
 
-app.use(function(req, res, next){
-	res.locals.currentUser = req.user;
-	// res.locals.message = req.flash('error');
-});
+app.use(user);
+app.use(main);
 
-
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(process.env.PORT, process.env.IP, () => {
 	console.log("Welcome to our web Apllication");
 });

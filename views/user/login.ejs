@@ -1,10 +1,17 @@
+
+<!--Body-->
 <h1>Login</h1>
-<div class="alert alert-danger" role="alert">
-  <%= message %>
+
+<div class="container">
+  <div class="alert alert-danger" role="alert"> <%= error %>  </div>
 </div>
 
-<form action="/sysadmin/login">
+
+
+
+<form action="/user/login" method="POST">
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
     <input type="submit" value="Login">
 </form>
+<!--Body-->
