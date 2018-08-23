@@ -20,6 +20,6 @@ userMiddleware.addUser = (req, res, next) => {
       }
 
   });
-}
+};
 
 module.exports = userMiddleware;

@@ -35,7 +35,7 @@ app.use(session({
 
 
 //SET UP GLOBAL
-app.use(function(req, res, next){
+app.use((req, res, next) => {
 	res.locals.session = req.session;
 	res.locals.error = req.flash("error");
 	res.locals.success = req.flash("success");
