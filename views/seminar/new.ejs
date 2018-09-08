@@ -1,0 +1,25 @@
+
+
+<% include ../partials/header.ejs %>
+<div class="container">
+    
+<form action="/seminar" method="POST">
+    <label for="name">name</label>
+    <input type="text" name="name" id="name">
+    <label for="abstract">abstract/label>
+    <input type="text" name="abstract" id="abstract">
+    <label for="date">date</label>
+    <input type="date" name="date" id="date">
+    <label for="speaker">speaker</label>
+    <input type="text" name="speaker" id="speaker">
+    <label for="time">time</label>
+    <input type="time" name="time" id="time">
+    <label for="duration">duration</label>
+    <input type="number" name="duration" id="duration" placeholder="mininus">
+    <label for="venue">venue</label>
+    <input type="text" name="venue" id="venue">
+    <input type="submit" value="Add">
+</form>
+
+</div>
+<% include ../partials/footer.ejs %>

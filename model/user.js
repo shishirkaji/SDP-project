@@ -1,11 +1,11 @@
-var mongoose = require("mongoose");
-var passportlocalmongoose = require('passport-local-mongoose');
+const mongoose = require("mongoose");
+const passportlocalmongoose = require('passport-local-mongoose');
 
-var userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: {type: String, required: true},
     password: {type: String, requied: true},
     roles: {
-        role: {type: String, required: true},
+        role: {type: mongoose.Schema.Types.ObjectId, requied: true},
         isAdmin: {type: Boolean, required: true}
     }
 });

@@ -1,0 +1,21 @@
+
+<p><%= error %></p>
+
+<form action="/user" method="post">
+    <label for="firstname">First Name:</label>
+    <input type="firstname" name="firstname" id="firstname">
+    <label for="lastname">Last Name:</label>
+    <input type="lastname" name="firstname" id="lastname">
+    <label for="phone">Phone number:</label>
+    <input type="number" name="phone" id="phone">
+    <label for="email">Email:</label>
+    <input type="email" name="username" id="email">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+    <select name="role">
+        <option value="sysadmin">System Admin</option>
+        <option value="organiser">Seminar Organisers</option>
+        <option value="speaker">Speaker</option>
+    </select>
+    <input type="submit" value="Add">
+</form>

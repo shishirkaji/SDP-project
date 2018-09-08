@@ -1,22 +1,23 @@
-//SET UP VARIABLE
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var methodOverride = require("method-override");
-var publicDir = require('path').join(__dirname,'/assets');
-var session = require("express-session");
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
-var flash = require("connect-flash");
+//SET UP constIABLE
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const methodOverride = require("method-override");
+const publicDir = require('path').join(__dirname,'/assets');
+const session = require("express-session");
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const flash = require("connect-flash");
 //DEFINE MODEL
-var User = require("./model/user");
-
+const User = require("./model/user");
+//RETRIEVE CONFIG
+const config = require("./config");
 
 //SET UP ROUTE
-var main = require("./router/main/index");
-var user = require('./router/user/user');
-
+const main = require("./router/main/index");
+const user = require('./router/user/user');
+const seminar = require('./router/seminar/seminar');
 
 //SET UP NODE CONFIG
 
@@ -39,7 +40,7 @@ app.use((req, res, next) => {
 	res.locals.session = req.session;
 	res.locals.error = req.flash("error");
 	res.locals.success = req.flash("success");
-	next()
+	next();
 });
 
 
@@ -51,11 +52,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 //SET UP MLab
-mongoose.connect('mongodb://joelNguyen1010:Hoilamcho1010@ds121332.mlab.com:21332/devbooking');
+mongoose.connect(config.mongoose);
 
 app.use(user);
 app.use(main);
+app.use(seminar);
 
-app.listen(process.env.PORT, process.env.IP, () => {
-	console.log("Welcome to our web Apllication");
-});
+// app.listen(process.env.PORT, process.env.IP, () => {
+// 	console.log("Welcome to our web Apllication");
+// });
+
+module.exports = app;
