@@ -1,0 +1,19 @@
+
+
+<% include ../partials/header.ejs %>
+<%= error %> 
+<div class="container">
+<p>Register for <%= seminar.name %> seminar</p>
+<form action="/attendee" method="POST">
+    <label for="name">name</label>
+    <input type="text" name="name" id="name">
+    <label for="phone">phone</label>
+    <input type="number" name="phone" id="phone" maxLength="10">
+    <label for="email">email</label>
+    <input type="email" name="email" id="email">
+    <input type="hidden" name="seminarId" value="<%=seminar._id%>">
+    <input type="submit" value="Register">
+</form>
+
+</div>
+<% include ../partials/footer.ejs %>

@@ -1,8 +1,10 @@
-var express = require('express');
+const express = require('express');
 var router = express.Router({mergeParams: true});
-var passport = require("passport");
-var userController = require('../../controller/user');
-var passportController = require("../../controller/passport");
+const passport = require("passport");
+const userController = require('../../controller/user');
+const passportController = require("../../controller/passport");
+const attendeeController = require('../../controller/attendee');
+
 var Attendee = require("../../model/attendees");
 //LOGIN
 router.get('/user/login', (req, res) => {
@@ -11,6 +13,11 @@ router.get('/user/login', (req, res) => {
 });
 router.post("/user/login", passportController.authenticate ,(req, res, next) => {
     res.redirect('/');
+});
+
+//REGISTER
+router.get('/user/register', (req, res) => {
+    res.render('user/register.ejs');
 });
 
 
@@ -25,11 +32,23 @@ router.get('/user/new', (req, res) => {
     res.render('user/new.ejs');
 });
 
+
+
 router.post('/user', userController.createUser, userController.addUser, (req, res) => {
     passport.authenticate("local")(req, res, () => {
         req.flash('success', "new account has been created");
          return res.redirect('/user/login');
     });
+});
+
+//SHOW ALL USER
+router.get('/user', (req, res) => {
+    res.render('user/index.ejs' , {users: []});
+});
+
+//SHOW ALL ATTENDEES
+router.get('/user/attendee', attendeeController.loadAllAttendee, (req, res) => {
+
 });
 
 //TESTING

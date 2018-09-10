@@ -3,7 +3,7 @@ class Seminar {
        this.name = build.name;
        this.abstract = build.abstract;
        this.date = build.date;
-       this.speakerId = build.speakerId;
+       this.speaker = build.speaker;
        this.time = build.time;
        this.duration = build.duration;
        this.venue = build.venue;
@@ -23,8 +23,8 @@ module.exports = class Builder {
              this.date = date;
              return this;
           }
-          buildSpeakerId(speakerId) {
-            this.speakerId = speakerId;
+          buildSpeaker(speaker) {
+            this.speaker = speaker;
             return this;
          }
          setTime(time) {

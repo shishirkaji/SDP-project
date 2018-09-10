@@ -1,0 +1,34 @@
+
+
+<% include ../partials/header.ejs %>
+<%= error %> 
+<div class="container">
+    
+<form action="/seminar/<%=seminar._id%>?_method=PUT" method="POST">
+
+    <label for="name">name</label>
+    <input type="text" name="name" id="name" value="<%= seminar.name %>">
+    <label for="abstract">abstract</label>
+    <input type="text" name="abstract" id="abstract" value="<%= seminar.abstract %>">
+    <label for="date">date</label>
+    <input type="date" name="date" id="date">
+    <label for="speaker">speaker</label>
+    <input type="text" name="speaker" id="speaker" value="<%= seminar.speaker %>">
+    <label for="time">time</label>
+    <input type="time" name="time" id="time" value="<%= seminar.time %>" >
+    <label for="duration">duration</label>
+    <input type="number" name="duration" id="duration" placeholder="mininus" value="<%= seminar.duration %>">
+    <label for="venue">venue</label>
+    <input type="text" name="venue" id="venue" value="<%= seminar.venue %>">
+    <label for="capacity">Capacity</label>
+    <input type="number" name="capacity" id="capacity" value="<%= seminar.capacity %>">
+    <input type="submit" value="Change">
+</form>
+
+
+<form action="/seminar/<%= seminar._id %>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete">
+</form>
+
+</div>
+<% include ../partials/footer.ejs %>
