@@ -1,0 +1,15 @@
+<% include ../partials/header.ejs  %>
+
+<p>Name: <%= seminar.name %></p>
+<p>Abstract: <%= seminar.abstract %></p>
+<p>Date: <%= seminar.date %></p>
+<p>Speaker: <%= seminar.speaker %></p>
+<p>Time: <%= seminar.time %></p>
+<p>Duration: <%= seminar.duration %></p>
+<p>Venue: <%= seminar.venue %></p>
+<p>Capacity: <%= seminar.capacity %></p>
+<a href="/attendee/seminar/<%=seminar._id%>"><p>Number of attendees: <%= seminar.attendees.length %></p></a>
+
+<a href="/seminar/<%=seminar._id%>/edit">Edit</a>
+<% include ../partials/footer.ejs  %>
+
