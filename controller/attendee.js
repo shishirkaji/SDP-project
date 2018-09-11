@@ -43,7 +43,6 @@ attendeeController.loadAllAttendee = (req, res, next) => {
     });
 }
 
-
 var findAllAttendee = (seminarId, callback) => {
     Seminar.find({_id : seminarId}, {attendees : 1}, (err, found) => {
         callback(err, found);
