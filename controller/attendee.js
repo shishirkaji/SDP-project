@@ -1,61 +1,60 @@
 const AttendeeBuilder = require('../Data/attendee/attendee');
 const Attendee = require('../model/attendees');
 const Seminar = require('../model/seminar');
-var { promisify } = require('util');
 var attendeeController = {};
 
 attendeeController.registerSeminar = (req, res, next) => {
-    updateOrAddAttendee(req, res, next)
+    // updateOrAddAttendee(req, res, next)
+    var newA = {
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email
+    }
+    updateRefSeminar(req.body.seminarId, newA)
+    res.redirect('/seminar');
 }
+
 
 attendeeController.checkExistingAttendee = (req, res, next) => {
-    Attendee.find({email : req.body.email}, (err, found) => {
-        if(err) throw err
-        req.found = found.length;
-        next();
-    })
-}
+    Seminar.findById({_id: req.body.seminarId}, (err, found) => {
+        if(err) {console.log(err);};
+        if(found.attendees.length > 0) {
+        found.attendees.forEach((attendee) => {
+            if(attendee.email === req.body.email) {
+                return res.render('attendee/existEmail.ejs');
+            } else {
+                return next();
+            }
+        });
+    } else {
+        return next();
+    }
+});
+};
 
 attendeeController.loadAllAttendee = (req, res, next) => {
-    var attendees = promisify(findAllAttendee);
-    attendees().then((found) => {
-        
-    })
-    .catch((err) => {throw err});
-}
-
-var updateOrAddAttendee = (req, res, next) => {
-    if(req.found === 0) {
-    let newAttendee = new AttendeeBuilder(req.body.name)
-    .buildEmail(req.body.email)
-    .buildPhone(req.body.phone)
-    .buildSeminars(req.body.seminarId)
-    .build()
-    newAttendee.save((err, newA) => {
-        if(err) throw err
-        updateRefSeminar(req.body.seminarId, newA._id);
-       return next();
-    });
+    findAllAttendee(req.params.id,(err, found) => {
+        if(err) {
+            throw err;
         } else {
-            Attendee.findOneAndUpdate({email : req.body.email}, {$push: {seminars: req.body.seminarId}}, (err, found) => {
-                updateRefSeminar(req.body.seminarId, found._id);
-                if(err) throw err
-                next();
-            })
+            req.attendees = found[0].attendees;
+            next();
         }
+    });
 }
 
-var findAllAttendee = (callback) => {
-    Attendee.find({}, (err, found) => {
+
+var findAllAttendee = (seminarId, callback) => {
+    Seminar.find({_id : seminarId}, {attendees : 1}, (err, found) => {
         callback(err, found);
     })
 }
 
-var updateRefSeminar = (seminarId, attendeeId) => {
-    
-    Seminar.findByIdAndUpdate({_id : seminarId}, {$push: {attendees : attendeeId}}, (err) => {
+var updateRefSeminar = (seminarId, newAttendee) => {
+    Seminar.findByIdAndUpdate({_id : seminarId}, {$push: {attendees : newAttendee}}, (err) => {
             if(err) throw err;
         });
 
 }
+
 module.exports = attendeeController;

@@ -17,7 +17,11 @@ const Schema = new mongoose.Schema({
     duration: {type: Number, required: [true, "please input duration"], max: [24, "The seminar should last in one day"]},
     venue: {type: String, require: [true, "please input venue"]},
     capacity: {type: Number, required: [true, "please input capacity"]},
-    attendees: [{type: mongoose.Schema.Types.ObjectId, ref: "Attendee"}]
+    attendees: [{
+        name: {type: String},
+        phone: {type: Number},
+        email: {type: String}
+    }]
 
 });
 

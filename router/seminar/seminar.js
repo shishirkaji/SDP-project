@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const seminarController = require('../../controller/seminar');
+
 //SHOW ALL SEMINAR AVAILABLE
 router.get('/seminar' , seminarController.loadSeminar ,(req, res) => {
     res.render('seminar/index.ejs', {seminars : req.seminars});
@@ -16,9 +17,14 @@ router.post('/seminar', seminarController.addSeminar , (req, res) => {
     res.redirect('/seminar');
 });
 
+//SHOW SEMINAR
+router.get('/seminar/:id', seminarController.findOneSeminar, (req, res) => {
+    res.render('seminar/show.ejs', {seminar : req.seminar});
+});
+
 
 //SHOW PARTICULAR SEMINAR
-router.get('/seminar/:id', seminarController.findOneSeminar, (req, res) => {
+router.get('/seminar/:id/edit', seminarController.findOneSeminar, (req, res) => {
     res.render('seminar/edit.ejs', {seminar : req.seminar});
 });
 
@@ -31,6 +37,7 @@ router.put('/seminar/:id', seminarController.updateOneSeminar, (req, res) => {
 router.delete('/seminar/:id', seminarController.deleteOneSeminar, (req, res) => {
     res.redirect('/seminar');
 });
+
 
 
 
