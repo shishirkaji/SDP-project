@@ -9,7 +9,7 @@ The Faculty of Engineering and Information Technology(FEIT) have a requirement f
 
 Building the new system will help to smooth the process of booking a seminar. Furthermore, the project will be able to expanded upon in the future to add new functionality and adapt to the changing requirements of the faculty.
 
-## Installation
+## Start Server
 Step 1. Download the zip file
 
 Step 2. Run command
