@@ -10,14 +10,17 @@
 <!-- Search form -->
 
 
-<table class="animated fadeIn table table-hover table-striped" id="tbdb"cellspacing="0">
+<table class="animated fadeIn table table-hover table-striped" id="myTable" cellspacing="0">
+<thead> 
     <tr>
-        <th scope="col"><a onclick="sortTable(0)"> Seminar <i class="fa fa-sort" aria-hidden="true"></i>  </a></th>
-        <th scope="col"><a onclick="sortTable(1)"> Venue <i class="fa fa-sort" aria-hidden="true"></i>  </a></th> 
-        <th scope="col"><a onclick="sortTable(2)"> Date <i class="fa fa-sort" aria-hidden="true"></i>  </a></th> 
-        <th scope="col"><a onclick="sortTable(3)"> Time <i class="fa fa-sort" aria-hidden="true"></i>  </a></th> 
-        <th scope="col"><a onclick="sortNumber()"> Capacity <i class="fa fa-sort" aria-hidden="true"></i>  </a></th> 
+        <th onclick="sort()" scope="col"><a> Seminar <i class="fa fa-sort" aria-hidden="true"></i>  </a></th>
+        <th scope="col"><a> Venue <i class="fa fa-sort" aria-hidden="true"></i>  </a></th> 
+        <th scope="col"><a> Date <i class="fa fa-sort" aria-hidden="true"></i>  </a></th> 
+        <th scope="col"><a> Time <i class="fa fa-sort" aria-hidden="true"></i>  </a></th> 
+        <th scope="col"><a> Capacity <i class="fa fa-sort" aria-hidden="true"></i>  </a></th> 
     </tr>
+    </thead> 
+    <tbody> 
     <% seminars.forEach((seminar) => { %> 
         <tr class='clickable-row' data-href='/attendee/new/<%= seminar._id %>'>
            <td><a><%= seminar.name %></a></td>
@@ -27,6 +30,7 @@
             <td><a><%= seminar.capacity %></a></td>
         </tr>
     <% }) %>
+    </tbody> 
 </table>
 
 <% } else { %>
@@ -36,6 +40,11 @@
 <a class="btn btn-primary" href="/seminar/new">Add</a>
 
 </div>
+<script src='/js/tablesort.js'></script>
+
+<!-- Include sort types you need -->
+<script src='/js/tablesort.number.js'></script>
+<script src='/js/tablesort.date.js'></script>
 
 <% include ../partials/JS/seminar-index %>
 <% include ../partials/footer %>
