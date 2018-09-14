@@ -11,6 +11,7 @@ Building the new system will help to smooth the process of booking a seminar. Fu
 
 ## Installation
 Step 1. Download the zip file
+
 Step 2. Run command
 ```
 npm install
