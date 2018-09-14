@@ -1,5 +1,13 @@
 <% attendees.forEach((attendee)=>{ %>
-   <p><%=attendee.name%></p>
-   <p><%=attendee.email%></p>
-   <p><%attendee.phone%></p>
+    <form action="/attendee/<%=seminarId%>/<%=attendee.email%>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+
+<form action="/attendee/<%=seminarId%>/<%=attendee.email%>?_method=PUT" method="POST">
+    <input type="text" name="name" value="<%=attendee.name%>">
+    <input type="text" name="email" value="<%=attendee.email%>">
+    <input type="text" name="phone" value="<%=attendee.phone%>">
+    <input type="submit" value="Save Edit">
+</form>
+
 <% }); %>
