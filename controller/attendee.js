@@ -2,7 +2,7 @@ const AttendeeBuilder = require('../Data/attendee/attendee');
 const Attendee = require('../model/attendees');
 const Seminar = require('../model/seminar');
 var attendeeController = {};
-
+//REGISTER SEMINAR
 attendeeController.registerSeminar = (req, res, next) => {
     // updateOrAddAttendee(req, res, next)
     var newA = {
@@ -14,9 +14,28 @@ attendeeController.registerSeminar = (req, res, next) => {
     res.redirect('/seminar');
 }
 
-
-attendeeController.checkExistingAttendee = (req, res, next) => {
+//CHECK CAPACITY
+attendeeController.checksAvailability = (req, res, next) => {
     Seminar.findById({_id: req.body.seminarId}, (err, found) => {
+        if(err) throw err;
+        if(found.attendees.length < found.capacity) {
+            return next();
+        } else {
+            return res.render('attendee/outOfSpace.ejs');
+        }
+    });
+};
+
+
+//CHECK EXISTING EMAIL IN ATTENDEE
+attendeeController.checkExistingAttendee = (req, res, next) => {
+    var seminarId = null;
+    if(req.body.seminarId) {
+        seminarId = req.body.seminarId;
+    } else {
+        seminarId = req.params.id;
+    }
+    Seminar.findById({_id: seminarId}, (err, found) => {
         if(err) {console.log(err);};
         if(found.attendees.length > 0) {
         found.attendees.forEach((attendee) => {
@@ -32,6 +51,8 @@ attendeeController.checkExistingAttendee = (req, res, next) => {
 });
 };
 
+
+//LOADING ALL ATTENDEE
 attendeeController.loadAllAttendee = (req, res, next) => {
     findAllAttendee(req.params.id,(err, found) => {
         if(err) {
@@ -42,6 +63,41 @@ attendeeController.loadAllAttendee = (req, res, next) => {
         }
     });
 }
+
+
+//DELETE ONE PARTICULAR ATTENDEE
+attendeeController.deleteAttendee = (req, res, next) => {
+    Seminar.update({_id: req.params.id}, {$pull: { attendees : {email: req.params.email } }}, (err, success) => {
+        if(err) {throw err;} 
+        else {
+            return next();
+        }
+    });
+}
+
+//EDIT ONE PARTICULAR ATTENDEE
+attendeeController.editAttendee = (req, res, next) => {
+    Seminar.update({_id: req.params.id}, 
+        {$set: 
+            { 
+                attendees : 
+                    {
+                        name: req.body.name,
+                        phone: req.body.phone,
+                        email: req.body.email 
+                    } 
+            }
+        }, 
+        (err, success) => {
+        if(err) {throw err;} 
+        else {
+            return next();
+        }
+    });
+}
+
+
+
 
 var findAllAttendee = (seminarId, callback) => {
     Seminar.find({_id : seminarId}, {attendees : 1}, (err, found) => {

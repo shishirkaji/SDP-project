@@ -5,6 +5,8 @@ const Speaker = require("../model/speaker");
 const Sysadmin = require("../model/sysadmin");
 const passport = require("passport");
 var { promisify } = require('util');
+
+//ADD USER
 userMiddleware.addUser = (req, res, next) => {
   var isAdmin = req.body.role === "sysadmin" ? true : false;
   var newUser = new User({
@@ -49,6 +51,7 @@ userMiddleware.addUser = (req, res, next) => {
 //   });
 // }
 
+//CREATING USER AND ASSIGN THEIR ROLE
 userMiddleware.createUser = (req, res, next) => {
     const name = (req.body.firstname + req.body.lastname);
     const email = req.body.username;
@@ -72,6 +75,8 @@ userMiddleware.createUser = (req, res, next) => {
         .then(next());
     }
 };
+
+
 var createSysadmin = (req, res, next) => {
     var newSysadmin = new Sysadmin({
         name: req.body.firstname,

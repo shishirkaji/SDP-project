@@ -10,4 +10,7 @@ router.get("/menu",authenticateController.isLoggin ,(req, res) => {
     res.render("main/menu.ejs");
 });
 
+router.get('/light-novel', (req, res) => {
+    res.render('attendee/outOfSpace.ejs');
+});
 module.exports = router;

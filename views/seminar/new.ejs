@@ -1,8 +1,9 @@
 
 
 <% include ../partials/header.ejs %>
+<% include ../partials/Shared/Navbar.ejs %>
 <%= error %> 
-<div class="container">
+<div class="animated fadeIn container mt-5">
     
 <form action="/seminar" method="POST">
     <label for="name">name</label>
@@ -25,4 +26,6 @@
 </form>
 
 </div>
+
+
 <% include ../partials/footer.ejs %>

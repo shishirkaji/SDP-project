@@ -34,6 +34,8 @@ router.put('/seminar/:id', seminarController.updateOneSeminar, (req, res) => {
     res.redirect('/seminar');
 });
 
+
+//DELETE SEMINAR
 router.delete('/seminar/:id', seminarController.deleteOneSeminar, (req, res) => {
     res.redirect('/seminar');
 });

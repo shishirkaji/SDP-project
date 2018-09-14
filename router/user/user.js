@@ -51,6 +51,9 @@ router.get('/user/attendee', attendeeController.loadAllAttendee, (req, res) => {
 
 });
 
+
+
+
 //TESTING
 router.get('/test', (req, res) => {
     var newAttendee = new Attendee({
