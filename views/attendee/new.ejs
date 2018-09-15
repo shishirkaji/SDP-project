@@ -4,18 +4,22 @@
 <%= error %> 
 <div class="container">
 <div class="row">
-
 <div class="card col-lg-7 mr-3 mt-4 mx-auto">
-<form action="/attendee" method="POST">
-    <label for="name">name</label>
-    <input type="text" name="name" id="name">
-    <label for="phone">phone</label>
-    <input type="number" name="phone" id="phone" maxLength="10">
-    <label for="email">email</label>
-    <input type="email" name="email" id="email">
+<form action="/attendee" method="POST" class="text-center p-5">
+    <h1 class="mb-4">Register</h1>
+    <input type="text" name="name" id="name" class="form-control mb-4" placeholder="Full name">
+    <input type="number" name="phone" id="phone" maxLength="10" class="form-control mb-4" placeholder="Phone number">
+    <input type="email" name="email" id="email" class="form-control mb-4" placeholder="email">
     <input type="hidden" name="seminarId" value="<%=seminar._id%>">
-    <input type="submit" value="Register">
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="subcribe" name="subcribe">
+        <label class="custom-control-label" for="subcribe">Subscribe to the system</label>
+    </div>
+
+    <button class="btn btn-primary my-4 btn-block" type="submit">Submit</button>
+
 </form>
+
 </div>
 
 <div class="card col-lg-4 mt-4">
