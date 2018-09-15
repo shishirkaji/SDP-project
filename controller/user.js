@@ -30,26 +30,6 @@ userMiddleware.addUser = (req, res, next) => {
   });
 };
 
-// var createAccount = (req, res, next ,role, email, _id, password) => {
-//       var isAdmin = role === "sysadmin" ? true : false;
-//   var newUser = new User({
-//      username: email,
-//      roles: {
-//          role: _id,
-//          isAdmin: isAdmin
-//      }
-//   });
-
-//   User.register(newUser, password, (err, user) => {
-//       if(err) {
-//           req.flash('error', err.message);
-//           return res.redirect('/user/new');
-         
-//       } else {
-//           req.flash('success', "New user has been added");
-//       }
-//   });
-// }
 
 //CREATING USER AND ASSIGN THEIR ROLE
 userMiddleware.createUser = (req, res, next) => {

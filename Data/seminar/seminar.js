@@ -9,6 +9,7 @@ class Seminar {
        this.venue = build.venue;
        this.capacity = build.capacity;
        this.attendees = build.attendees;
+       this.organiser = build.organiser;
     }
 }
 module.exports = class Builder {
@@ -45,6 +46,10 @@ module.exports = class Builder {
          }
          buildAttendees(attendees) {
              this.attendees = attendees;
+             return this;
+         }
+         buildOrganiser(organiser) {
+             this.organiser = organiser;
              return this;
          }
           build() {

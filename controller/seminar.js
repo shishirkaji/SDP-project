@@ -1,7 +1,7 @@
 var seminarController = {};
 const Seminar = require('../model/seminar');
 var SeminarBuilder = require('../Data/seminar/seminar');
-
+//ADD NEW SEMINAR
 seminarController.addSeminar = (req, res, next) => {
     let newSeminar = new SeminarBuilder(req.body.name)
     .buildAbstract(req.body.abstract)
@@ -11,6 +11,7 @@ seminarController.addSeminar = (req, res, next) => {
     .setCapacity(req.body.capacity)
     .setDuration(req.body.duration)
     .buildSpeaker(req.body.speaker)
+    .buildOrganiser(req.user._id)
     .build();
 
     var seminar = new Seminar(newSeminar);
@@ -71,6 +72,7 @@ seminarController.deleteOneSeminar = (req, res, next) => {
         next();
     });
 };
+
 
 
 module.exports = seminarController;

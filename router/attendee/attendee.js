@@ -27,6 +27,12 @@ router.delete("/attendee/:id/:email", attendeeController.deleteAttendee ,(req, r
     res.redirect('back');
 });
 
+//MESSAGE ON NAVBAR
+router.get('/attendee/navbar', (req, res) => {
+    req.flash('success', "Please chose the seminar you want to register, or search for the name of the seminar");
+    res.redirect('/seminar');
+})
+
 
 
 

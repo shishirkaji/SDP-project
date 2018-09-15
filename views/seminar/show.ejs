@@ -1,15 +1,39 @@
 <% include ../partials/header.ejs  %>
 
-<p>Name: <%= seminar.name %></p>
-<p>Abstract: <%= seminar.abstract %></p>
-<p>Date: <%= seminar.date %></p>
-<p>Speaker: <%= seminar.speaker %></p>
-<p>Time: <%= seminar.time %></p>
-<p>Duration: <%= seminar.duration %></p>
-<p>Venue: <%= seminar.venue %></p>
-<p>Capacity: <%= seminar.capacity %></p>
-<a href="/attendee/seminar/<%=seminar._id%>"><p>Number of attendees: <%= seminar.attendees.length %></p></a>
 
-<a href="/seminar/<%=seminar._id%>/edit">Edit</a>
+
+<div class="container-fluid mt-5">
+
+<div class="card w-custom m-auto mw-100" alt="Max-width 100%">
+
+  <div class="card-body">
+    <h1 class="card-title"><%= seminar.name %></h4>
+    <hr>
+    <h4 class="card-title">Info:</a></h4>
+    <p class="card-text"><%= seminar.abstract %></p>
+    <h4 class="card-title">Date:</a></h4>
+    <p class="card-text"><%= seminar.date %></p>
+    <h4 class="card-title">Speaker:</a></h4>
+    <p class="card-text"><%= seminar.speaker %></p>
+    <h4 class="card-title">Time:</a></h4>
+    <p class="card-text"><%= seminar.time %></p>
+    <h4 class="card-title">Duration:</a></h4>
+    <p class="card-text"><%= seminar.duration %></p>
+    <h4 class="card-title">Venue:</a></h4>
+    <p class="card-text"><%= seminar.venue %></p>
+    <h4 class="card-title">Number of attendees:</a></h4>
+    <p class="card-text"><%= seminar.attendees.length %>/<%= seminar.capacity %></p>
+
+    <a class="btn btn-primary" href="/attendee/seminar/<%=seminar._id%>">All Attendees</a>
+    <a class="btn btn-primary" href="/attendee/new/<%=seminar._id%>">Register</a>
+    <a class="btn btn-primary" href="/seminar/<%=seminar._id%>/edit">Edit</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+
 <% include ../partials/footer.ejs  %>
 

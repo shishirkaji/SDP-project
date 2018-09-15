@@ -37,23 +37,13 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 //SET UP SESSION
+
 app.use(session({
-	secret: "SDP project env",
+	secret: "SDP project envaewfawef",
 	resave: false,
 	saveUninitialized: false,
 	cookie: { maxAge: 180*60*1000 }
 }));
-
-
-//SET UP GLOBAL
-app.use((req, res, next) => {
-	res.locals.session = req.session;
-	res.locals.currentUser = req.user;
-	res.locals.error = req.flash("error");
-	res.locals.success = req.flash("success");
-	next();
-});
-
 
 //SET UP PASSPORT
 app.use(passport.initialize());
@@ -64,6 +54,16 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 //SET UP MLab
 mongoose.connect(config.mongoose);
+
+//SET UP GLOBAL
+app.use((req, res, next) => {
+	res.locals.session = req.session;
+	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	res.locals.info = req.flash("info");
+	next();
+});
 
 app.use(user);
 app.use(main);

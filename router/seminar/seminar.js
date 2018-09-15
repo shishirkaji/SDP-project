@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const seminarController = require('../../controller/seminar');
+const passportController = require('../../controller/passport');
 
 //SHOW ALL SEMINAR AVAILABLE
 router.get('/seminar' , seminarController.loadSeminar ,(req, res) => {
@@ -8,12 +9,12 @@ router.get('/seminar' , seminarController.loadSeminar ,(req, res) => {
 });
 
 //SHOW TEMPLATE TO ADD SEMINAR
-router.get('/seminar/new', (req, res) => {
+router.get('/seminar/new', passportController.isLoggin, (req, res) => {
     res.render('seminar/new.ejs');
 });
 
 //CREATE SEMINAR
-router.post('/seminar', seminarController.addSeminar , (req, res) => {
+router.post('/seminar', passportController.isLoggin , seminarController.addSeminar , (req, res) => {
     res.redirect('/seminar');
 });
 
@@ -23,23 +24,22 @@ router.get('/seminar/:id', seminarController.findOneSeminar, (req, res) => {
 });
 
 
-//SHOW PARTICULAR SEMINAR
-router.get('/seminar/:id/edit', seminarController.findOneSeminar, (req, res) => {
+//SHOW FORM TO EDIT PARTICULAR SEMINAR
+router.get('/seminar/:id/edit', passportController.isLoggin, seminarController.findOneSeminar, (req, res) => {
     res.render('seminar/edit.ejs', {seminar : req.seminar});
 });
 
 
 //EDIT PARTICULAR SEMINAR
-router.put('/seminar/:id', seminarController.updateOneSeminar, (req, res) => {
+router.put('/seminar/:id', passportController.isLoggin , seminarController.updateOneSeminar, (req, res) => {
     res.redirect('/seminar');
 });
 
 
 //DELETE SEMINAR
-router.delete('/seminar/:id', seminarController.deleteOneSeminar, (req, res) => {
+router.delete('/seminar/:id', passportController.isLoggin , seminarController.deleteOneSeminar, (req, res) => {
     res.redirect('/seminar');
 });
-
 
 
 

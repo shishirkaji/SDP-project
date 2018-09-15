@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const datetime = require('node-datetime');
 
 const Schema = new mongoose.Schema({
-    name: {type: String, required: [true, "Please provide full name"], maxlength: [200, "You have reach the maximum length of the name"]},
+    name: {type: String, unique: [true, "The seminar with the given name already exist"],required: [true, "Please provide full name"], maxlength: [200, "You have reach the maximum length of the name"]},
     abstract: {type: String},
     date: {type: String, requied: [true, "Please input date"]},
     speaker: [{type: String}],
@@ -21,7 +21,8 @@ const Schema = new mongoose.Schema({
         name: {type: String},
         phone: {type: Number},
         email: {type: String}
-    }]
+    }],
+    organiser: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 
 });
 

@@ -5,3 +5,20 @@
 .bg-footer {
     background-color: #4285f4 !important;
 }
+
+.m-custom {
+    margin-bottom: 10rem !important;
+    margin-top: 10rem !important;
+    position: relative;
+}
+
+
+.w-custom {
+    width: 50rem !important;
+    position: relative;
+  }
+
+.w-login-custom {
+    width: 30rem !important;
+    position: relative;
+}

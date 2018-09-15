@@ -20,13 +20,24 @@
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <% if(currentUser) { %>
+                        <%=currentUser.username%> 
+                        </a>
+
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                   <% } else { %>
+                        User
+                    </a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/user/login">Login</a>
                         </div>
+                        <% } %>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Attendee</a>
+                    <a class="nav-link" href="/attendee/navbar">Register Seminar</a>
                 </li>
 
             </ul>
@@ -35,4 +46,9 @@
     </nav>
 
 </header>
-<!--Main Navigation-->
+
+<% if(info && info.length >0 ) { %>
+<div class="alert alert-info" role="alert">
+  <p><%=info%></a>
+</div>
+<% } %>

@@ -1,16 +1,29 @@
 <% include ../partials/header %>
 
-<% include ../partials/Shared/Navbar %>
 
 
 
 <div class="container-fluid mt-5">
+
+<%if(success && success.length > 0) {%>
+<div class="alert alert-info" role="alert">
+<%=success%>
+</div>
+<% } %>
+
+
 <% if(seminars.length > 0 && seminars) { %>
 
 <!-- Search form -->
+<div class="md-form m-auto mw-100" alt="Max-width 100%">
+    <input name="search" id="myInput" onkeyup="search()" class="form-control w-100" type="text" placeholder="Search for seminar" aria-label="Search">
+</div>
 
 
-<table class="animated fadeIn table table-hover table-striped" id="myTable" cellspacing="0">
+
+
+
+<table class="animated fadeIn table table-striped" id="myTable" cellspacing="0">
 <thead> 
     <tr>
         <th onclick="sort()" scope="col"><a> Seminar <i class="fa fa-sort" aria-hidden="true"></i>  </a></th>
@@ -22,7 +35,7 @@
     </thead> 
     <tbody> 
     <% seminars.forEach((seminar) => { %> 
-        <tr class='clickable-row' data-href='/attendee/new/<%= seminar._id %>'>
+        <tr class='clickable-row hoverable' data-href='/seminar/<%= seminar._id %>'>
            <td><a><%= seminar.name %></a></td>
             <td><a><%= seminar.venue %></a></td>
             <td><a><%= seminar.date %></a></td>
@@ -38,6 +51,7 @@
 <% } %>
 
 <a class="btn btn-primary" href="/seminar/new">Add</a>
+
 
 </div>
 <script src='/js/tablesort.js'></script>
